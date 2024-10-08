@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\DCL",
+    "\\DDL",
+    "\\DML",
+    "\\DQL",
+    "\\DQL\\Dynamic SQL",
+    "\\DQL\\Searching",
+    "\\TCL"
+  ],
+  "SelectedNode": "\\DCL\\MASKING.sql",
+  "PreviewInSolutionExplorer": false
+}
