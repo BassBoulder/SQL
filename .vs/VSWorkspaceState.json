@@ -1,14 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\DCL",
-    "\\DDL",
-    "\\DML",
-    "\\DQL",
-    "\\DQL\\Dynamic SQL",
-    "\\DQL\\Searching",
-    "\\TCL"
+    "\\Documentation",
+    "\\Documentation\\Lorenzo circa 2020",
+    "\\Type"
   ],
-  "SelectedNode": "\\DML\\Placeholder.md",
+  "SelectedNode": "\\Documentation\\Lorenzo circa 2020\\NHS2-LOR2-DIA-14000-025-LORENZO Generic Extract Entity Relationship Diagrams R2.15.0.0 (Build 673).doc",
   "PreviewInSolutionExplorer": false
 }
