@@ -13,4 +13,4 @@ CREATE TABLE Normalised_Origin_Address
 	,[Address_2] Varchar(100)
 )
 
-DROP TABLE Normalised_Origin_Address, Normalised_Origin_People
+--DROP TABLE Normalised_Origin_Address, Normalised_Origin_People
