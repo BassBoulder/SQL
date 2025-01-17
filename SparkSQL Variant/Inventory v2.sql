@@ -1,9 +1,8 @@
-inventory = spark.sql("""
-
 WITH inventory_max_modified_date AS (
     SELECT DISTINCT 
 		 itemid
 		,endbrand
+		,product
 		,modifiedon
 		,DENSE_RANK() OVER (PARTITION BY itemid ORDER BY endbrand, modifiedon  DESC) RankID
 	FROM 
@@ -23,44 +22,49 @@ WITH inventory_max_modified_date AS (
 		pricedisctable 
 	WHERE
 		currency = 'GBP'
+
 )
 
 SELECT
-	 DATE_SUB(DATE_TRUNC('DAY', NOW()), 1) as Date
-	,CONCAT(
-        COALESCE(ivs.itemid, ''),
+	CONCAT(
+	COALESCE(ivs.itemid, ''),
 		COALESCE(ivs.inventcolorid,''),
 		COALESCE(ivs.inventsizeid,'')
-        ) ProductID
+		) ProductID
 	,ivs.inventlocationid LocationID
 	,SUM(ivs.physicalinvent) LocationUnits
-	,COALESCE(pdt.endinsale, 0) PriceIndicator
+	,pdt.endinsale PriceIndicator
 
 FROM 
-	DE_LH_100_SPS_Integration.inventsum ivs
+	inventsum ivs
 
 LEFT JOIN inventory_max_modified_date ivt
 	ON ivs.itemid = ivt.itemid
-    AND ivt.RankID = 1
+	AND ivt.RankID = 1
 
 LEFT JOIN inventory_max_sale_flag pdt
 	ON pdt.itemrelation = ivs.itemid 
-    AND pdt.RankID = 1
+	AND pdt.RankID = 1
+
+LEFT JOIN ecoresdistinctproductvariant pv
+	ON pv.productmaster = ivt.product 
+	AND ivs.dataareaid = 'end.'
+
 
 WHERE 
 	ivs.dataareaid = 'end.'
-AND
-    ivs.modifieddatetime BETWEEN DATE_SUB(DATE_TRUNC('DAY', NOW()), 8) AND DATE_SUB(DATE_TRUNC('DAY', NOW()), 1)
+AND 
+	ivs.itemid = 'AA20982'
 
 GROUP BY 
 	 CONCAT(
-        COALESCE(ivs.itemid, ''),
+	 COALESCE(ivs.itemid, ''),
 		COALESCE(ivs.inventcolorid,''),
 		COALESCE(ivs.inventsizeid,'')
-        )
-	,inventlocationid
-	,COALESCE(pdt.endinsale, 0)
+		)
+	,ivs.inventlocationid
+	,pdt.endinsale
 HAVING 
 	SUM(ivs.physicalinvent) > 0
-"""
-)
+ORDER BY 
+	ProductID ASC
