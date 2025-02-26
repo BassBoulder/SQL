@@ -1,0 +1,8 @@
+﻿SELECT 
+	 [DisplayFolder]
+	,[Name]
+	//,[Description]
+	,[Expression]
+	//,[FormatString] 
+FROM 
+	$SYSTEM.TMSCHEMA_MEASURES
