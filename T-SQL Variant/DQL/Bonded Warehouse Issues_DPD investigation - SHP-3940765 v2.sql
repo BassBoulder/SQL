@@ -1,17 +1,24 @@
 SELECT
-	'ENDCTG' 'Company Code'
-	,'' 'Site Code'
-	,whscontainertable.shipcarriertrackingnum 'Issue Reference'
-	,custpackingslipjour.deliverydate 'Issue Date'
-	,'DPDSHIP' 'Project Reference'
-	,'' 'IPR Reference'
-	,'' 'Stock Detail Key Type'
-	,'' 'Stock Detail Key'
-	,custpackingsliptrans.itemid 'Product/Part No. Ref'
-	,custpackingsliptrans.qty Quantity
-	,'' Price
-	,'' Currency
-	,salestable.salesname 'Customer'
+	whsshipmenttable.*
+	,'   ' '------------'
+	,'   ' '------------'
+	,whscontainertable.*
+	,'   ' '------------'
+	,'   ' '------------'
+	,whsloadline.*
+	,'   ' '------------'
+	,'   ' '------------'
+	,custpackingsliptrans.*
+	,'   ' '------------'
+	,'   ' '------------'
+	,custpackingslipjour.*
+	,'   ' '------------'
+	,'   ' '------------'
+	,salestable.*
+	,'   ' '------------'
+	,'   ' '------------'
+	,logisticspostaladdress.*
+
 FROM
 	whsshipmenttable
 
@@ -41,3 +48,5 @@ INNER JOIN logisticspostaladdress
 
 WHERE
 	whsshipmenttable.shipmentid = 'SHP-3940765'
+AND
+	custpackingsliptrans.itemid = 'AC35480'

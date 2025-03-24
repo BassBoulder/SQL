@@ -11,15 +11,15 @@ SELECT
 
 	,CASE 
 	WHEN transportidlookup.Shippingcarrierservice IS NULL THEN whsshipmenttable.hslbordertransportid
-	ELSE transportidlookup.Bordertransportid END 'Border Transport ID'
+	ELSE transportidlookup.BorderTransportID END 'Border Transport ID'
 
 	,CASE 
 	WHEN transportidlookup.Shippingcarrierservice IS NULL THEN whsshipmenttable.hslbordertransportnationality
-	ELSE transportidlookup.Bordertransportnationality END 'Border Transport Nationality'
+	ELSE transportidlookup.BorderTransportNationality END 'Border Transport Nationality'
 
 	,CASE 
 	WHEN transportidlookup.Shippingcarrierservice IS NULL THEN whsshipmenttable.hslinlandtransportid
-	ELSE transportidlookup.Inlandtransportid END 'Inland Transport ID'
+	ELSE transportidlookup.InlandTransportID END 'Inland Transport ID'
 
 	,REPLACE(REPLACE(whsshipmenttable.hslmovementkey, ' ', ''),'-','_') 'Movement Key'
 
@@ -56,10 +56,12 @@ AND
 AND 
 	logisticspostaladdress.countryregionid != 'GBR'
 AND 
+	(	
 	salestable.dlvmode NOT IN 
-	  ('DPD-2-3','DPD-DPD','DPD-Econ','DPD-Fre1','DPD-Fre2','DPD-Fre3','DPD-Fre4','DPD-Fre5'
-	  ,'DPD-Fre6','DPD-Fre7','DPD-Fre8','DPD-Free','DPD-Laun','DPD-Next','DPD-Prio','DPD-ROI'
-	  ,'DPD-Sta1','DPD-Sta2','DPD-Sta3','DPD-Sta4','DPD-Sta5','DPD-Sta6','DPD-Staf','DPD-Stan'
-	  ,'DPD-UK L')
-AND
-	whsshipmenttable.shipmentid = 'SHP-3844201'
+		  ('DPD-2-3','DPD-DPD','DPD-Econ','DPD-Fre1','DPD-Fre2','DPD-Fre3','DPD-Fre4','DPD-Fre5'
+		  ,'DPD-Fre6','DPD-Fre7','DPD-Fre8','DPD-Free','DPD-Laun','DPD-Next','DPD-Prio','DPD-ROI'
+		  ,'DPD-Sta1','DPD-Sta2','DPD-Sta3','DPD-Sta4','DPD-Sta5','DPD-Sta6','DPD-Staf','DPD-Stan'
+		  ,'DPD-UK L')
+	 OR
+		salestable.dlvmode IS NULL
+	)

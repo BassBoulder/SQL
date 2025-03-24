@@ -1,3 +1,6 @@
+
+
+
 SELECT
 	'ENDCTG' 'Company Code'
 	,'' 'Site Code'
@@ -12,6 +15,13 @@ SELECT
 	,'' Price
 	,'' Currency
 	,salestable.salesname 'Customer'
+	,'   ' '------------'
+	,'   ' '------------'
+	,whscontainertable.shipmentid
+	,whscontainertable.containerid
+	,whscontainertable.containernum
+
+
 FROM
 	whsshipmenttable
 
@@ -19,6 +29,7 @@ INNER JOIN whscontainertable
 	ON whsshipmenttable.shipmentid = whscontainertable.shipmentid
     AND whsshipmenttable.dataareaid = whscontainertable.dataareaid
     AND whscontainertable.containerstatus = 2
+	AND whscontainertable.containernum = 1
 
 INNER JOIN whsloadline
 	ON whscontainertable.shipmentid = whsloadline.shipmentid
@@ -41,3 +52,5 @@ INNER JOIN logisticspostaladdress
 
 WHERE
 	whsshipmenttable.shipmentid = 'SHP-3940765'
+AND
+	custpackingsliptrans.itemid = 'AB77448'
