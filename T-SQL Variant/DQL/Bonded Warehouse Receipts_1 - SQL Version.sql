@@ -256,7 +256,7 @@ SELECT
 	,whsloadtable.loadshipconfirmutcdatetime 'Receipt Date'
 	,'PEIM' 'Receipt Type'
 	,hslcommercialinvoice.portairportofarrival 'Port/Airport of Arrival'
-	,'Airport of Departure'
+	,hslcommercialinvoice.airportofdeparture 'Airport of Departure'
 	,hslcommercialinvoice.nationality 'Nationality'
 	,'' 'Inland Depot'
 	,'' 'Container ID'
@@ -274,7 +274,7 @@ SELECT
 	,'' 'Air Freight'
 	,'' 'Air Freight Currency'
 	,'' 'Air Freight basis'
-	,'' 'Shipped Date'
+	,hslcommercialinvoice.shippeddate 'Shipped Date'
 	,'' 'Date of Arrival'
 	,'' 'Voyage Reference'
 	,'' 'Ships Name'
@@ -303,13 +303,14 @@ AND
 	whsloadtable.dataareaid IN ('end.','END.')
 AND
 	whsloadtable.loadstatus != '0'
-AND
-	loadid = 'LD-3798936'
+--AND
+--	loadid = 'LD-3798936'
 
 GROUP BY
 	 whsloadtable.loadid
 	,whsloadtable.loadshipconfirmutcdatetime
 	,hslcommercialinvoice.portairportofarrival
+	,hslcommercialinvoice.airportofdeparture
 	,hslcommercialinvoice.nationality
 	,hslcommercialinvoice.modeoftransport
 	,hslcommercialinvoice.numberofpackages
@@ -321,3 +322,4 @@ GROUP BY
 	,hslcommercialinvoice.mrn
 	,hslcommercialinvoice.bookingreference
 	,hslcommercialinvoice.bookingreference
+	,hslcommercialinvoice.shippeddate
