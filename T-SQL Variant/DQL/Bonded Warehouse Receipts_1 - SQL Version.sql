@@ -1,74 +1,69 @@
 SELECT
-	'1' 'Record Type'
-	,'ENDCTG' 'Company Code'
-	,whsloadtable.loadid 'Receipt Reference'
-	,whsloadtable.loadshipconfirmutcdatetime 'Receipt Date'
-	,'PEIM' 'Receipt Type'
-	,hslcommercialinvoice.portairportofarrival 'Port/Airport of Arrival'
-	,hslcommercialinvoice.airportofdeparture 'Airport of Departure'
-	,hslcommercialinvoice.nationality 'Nationality'
-	,'' 'Inland Depot'
-	,'' 'Container ID'
-	,hslcommercialinvoice.modeoftransport 'Mode of Transport'
-	,'3' 'Inland Mode of Transport'
-	,SUM(hslcommercialinvoice.value) 'Total Value'
-	,hslcommercialinvoice.numberofpackages 'No. of Packages'
-	,'' 'Volume (cubic metres)'
-	,SUM(hslcommercialinvoice.grossweight) 'Gross Weight'
-	,'' 'Agent'
-	,'' 'Carrier'
-	,hslcommercialinvoice.freightcharges 'Freight'
-	,hslcommercialinvoice.freightchargescurrency 'Freight currency'
-	,hslcommercialinvoice.freightbasis 'Freqight basis'
-	,'' 'Air Freight'
-	,'' 'Air Freight Currency'
-	,'' 'Air Freight basis'
-	,hslcommercialinvoice.shippeddate 'Shipped Date'
-	,'' 'Date of Arrival'
-	,'' 'Voyage Reference'
-	,'' 'Ships Name'
-	,'' 'Post Importation Charges'
-	,'' 'Post Importation currency'
-	,'' 'Post Importation basis'
-	,'' 'Container Number'
-	,hslcommercialinvoice.arrivaltransportidtype 'Arrival Transport ID Type'
-	,hslcommercialinvoice.arrivaltransportid 'Arrival Transport ID'
-	,hslcommercialinvoice.mrn 'MRN'
-	,'' 'Previous Document Ref'
-	,'' 'Previous Document Type'
-	,hslcommercialinvoice.bookingreference 'Key'
-	,hslcommercialinvoice.bookingreference 'Level_Key'
+     '1' AS Record_Type
+    ,'ENDCTG' AS Company_Code
+    ,whsloadtable.loadid AS Receipt_Reference
+    ,whsloadtable.loadshipconfirmutcdatetime AS Receipt_Date
+    ,'PEIM' AS Receipt_Type
+    ,hslcommercialinvoice.portairportofarrival AS Port_Airport_Of_Arrival
+    ,hslcommercialinvoice.airportofdeparture AS Airport_Of_Departure
+    ,hslcommercialinvoice.nationality AS Nationality
+    ,'' AS Inland_Depot
+    ,'' AS Container_ID
+    ,hslcommercialinvoice.modeoftransport AS Mode_Of_Transport
+    ,'3' AS Inland_Mode_Of_Transport
+    ,SUM(hslcommercialinvoice.value) AS Total_Value
+    ,hslcommercialinvoice.numberofpackages AS Number_Of_Packages
+    ,'' AS Volume_Cubic_Metres
+    ,SUM(hslcommercialinvoice.grossweight) AS Gross_Weight
+    ,'' AS Agent
+    ,'' AS Carrier
+    ,hslcommercialinvoice.freightcharges AS Freight
+    ,hslcommercialinvoice.freightchargescurrency AS Freight_Currency
+    ,hslcommercialinvoice.freightbasis AS Freight_Basis
+    ,'' AS Air_Freight
+    ,'' AS Air_Freight_Currency
+    ,'' AS Air_Freight_Basis
+    ,hslcommercialinvoice.shippeddate AS Shipped_Date
+    ,'' AS Date_Of_Arrival
+    ,'' AS Voyage_Reference
+    ,'' AS Ships_Name
+    ,'' AS Post_Importation_Charges
+    ,'' AS Post_Importation_Currency
+    ,'' AS Post_Importation_Basis
+    ,'' AS Container_Number
+    ,hslcommercialinvoice.arrivaltransportidtype AS Arrival_Transport_ID_Type
+    ,hslcommercialinvoice.arrivaltransportid AS Arrival_Transport_ID
+    ,hslcommercialinvoice.mrn AS MRN
+    ,'' AS Previous_Document_Ref
+    ,'' AS Previous_Document_Type
+    ,hslcommercialinvoice.bookingreference AS `Key`
+    ,hslcommercialinvoice.bookingreference AS Level_Key
+    ,'' AS Parent_Key
 
-FROM
-	hslcommercialinvoice
+FROM hslcommercialinvoice
 
-LEFT JOIN whsloadtable ON
-	hslcommercialinvoice.bookingreference = whsloadtable.hslcomminvbookingreference
-	AND hslcommercialinvoice.dataareaid = whsloadtable.dataareaid
+LEFT JOIN whsloadtable
+    ON hslcommercialinvoice.bookingreference = whsloadtable.hslcomminvbookingreference
+    AND hslcommercialinvoice.dataareaid = whsloadtable.dataareaid
 
 WHERE
-	whsloadtable.hslcomminvbookingreference != ''
-AND
-	whsloadtable.dataareaid IN ('end.','END.')
-AND
-	whsloadtable.loadstatus != '0'
---AND
---	loadid = 'LD-3825365'
+    whsloadtable.hslcomminvbookingreference != ''
+    AND whsloadtable.dataareaid IN ('end.', 'END.')
+    AND whsloadtable.loadstatus != '0'
 
 GROUP BY
-	 whsloadtable.loadid
-	,whsloadtable.loadshipconfirmutcdatetime
-	,hslcommercialinvoice.portairportofarrival
-	,hslcommercialinvoice.airportofdeparture
-	,hslcommercialinvoice.nationality
-	,hslcommercialinvoice.modeoftransport
-	,hslcommercialinvoice.numberofpackages
-	,hslcommercialinvoice.freightcharges
-	,hslcommercialinvoice.freightchargescurrency
-	,hslcommercialinvoice.freightbasis
-	,hslcommercialinvoice.arrivaltransportidtype
-	,hslcommercialinvoice.arrivaltransportid
-	,hslcommercialinvoice.mrn
-	,hslcommercialinvoice.bookingreference
-	,hslcommercialinvoice.bookingreference
-	,hslcommercialinvoice.shippeddate
+     whsloadtable.loadid
+    ,whsloadtable.loadshipconfirmutcdatetime
+    ,hslcommercialinvoice.portairportofarrival
+    ,hslcommercialinvoice.airportofdeparture
+    ,hslcommercialinvoice.nationality
+    ,hslcommercialinvoice.modeoftransport
+    ,hslcommercialinvoice.numberofpackages
+    ,hslcommercialinvoice.freightcharges
+    ,hslcommercialinvoice.freightchargescurrency
+    ,hslcommercialinvoice.freightbasis
+    ,hslcommercialinvoice.arrivaltransportidtype
+    ,hslcommercialinvoice.arrivaltransportid
+    ,hslcommercialinvoice.mrn
+    ,hslcommercialinvoice.bookingreference
+    ,hslcommercialinvoice.shippeddate
