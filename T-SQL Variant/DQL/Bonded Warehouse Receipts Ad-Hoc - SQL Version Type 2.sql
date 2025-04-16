@@ -1,7 +1,17 @@
 SELECT
-	'1' 'Record Type'
-	,'ENDCTG' 'Company Code'
-	,whsloadtable.loadid 'Receipt Reference'
+	 whsloadtable.loadid 'Receipt Reference'
+	,whsloadtable.ordernum
+	,hslcommercialinvoice.purchaseorder
+	,hslcommercialinvoice.bookingreference
+	,whsloadtable.hslcomminvbookingreference
+	,hslcommercialinvoice.polinetotal
+	,hslcommercialinvoice.locationname
+	,hslcommercialinvoice.nationality
+	,hslcommercialinvoice.preferencedocumentstatuscode
+	,hslcommercialinvoice.preferencedocumenttype
+	,hslcommercialinvoice.countryoforigin
+	,hslcommercialinvoice.shippeddate 'Shipped Date'
+
 	,whsloadtable.loadshipconfirmutcdatetime 'Receipt Date'
 	,'PEIM' 'Receipt Type'
 	,hslcommercialinvoice.portairportofarrival 'Port/Airport of Arrival'
@@ -11,10 +21,10 @@ SELECT
 	,'' 'Container ID'
 	,hslcommercialinvoice.modeoftransport 'Mode of Transport'
 	,'3' 'Inland Mode of Transport'
-	,SUM(hslcommercialinvoice.value) 'Total Value'
+	,hslcommercialinvoice.value 'Total Value'
 	,hslcommercialinvoice.numberofpackages 'No. of Packages'
 	,'' 'Volume (cubic metres)'
-	,SUM(hslcommercialinvoice.grossweight) 'Gross Weight'
+	,hslcommercialinvoice.grossweight 'Gross Weight'
 	,'' 'Agent'
 	,'' 'Carrier'
 	,hslcommercialinvoice.freightcharges 'Freight'
@@ -23,7 +33,7 @@ SELECT
 	,'' 'Air Freight'
 	,'' 'Air Freight Currency'
 	,'' 'Air Freight basis'
-	,hslcommercialinvoice.shippeddate 'Shipped Date'
+
 	,'' 'Date of Arrival'
 	,'' 'Voyage Reference'
 	,'' 'Ships Name'
@@ -52,23 +62,5 @@ AND
 	whsloadtable.dataareaid IN ('end.','END.')
 AND
 	whsloadtable.loadstatus != '0'
---AND
---	loadid = 'LD-3825365'
-
-GROUP BY
-	 whsloadtable.loadid
-	,whsloadtable.loadshipconfirmutcdatetime
-	,hslcommercialinvoice.portairportofarrival
-	,hslcommercialinvoice.airportofdeparture
-	,hslcommercialinvoice.nationality
-	,hslcommercialinvoice.modeoftransport
-	,hslcommercialinvoice.numberofpackages
-	,hslcommercialinvoice.freightcharges
-	,hslcommercialinvoice.freightchargescurrency
-	,hslcommercialinvoice.freightbasis
-	,hslcommercialinvoice.arrivaltransportidtype
-	,hslcommercialinvoice.arrivaltransportid
-	,hslcommercialinvoice.mrn
-	,hslcommercialinvoice.bookingreference
-	,hslcommercialinvoice.bookingreference
-	,hslcommercialinvoice.shippeddate
+AND
+	loadid = 'LD-3825365'

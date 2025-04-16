@@ -1,8 +1,15 @@
 SELECT
 	'1' 'Record Type'
 	,'ENDCTG' 'Company Code'
+	,ordernum
+	,hslcommercialinvoice.preferencedocumenttype
+	,hslcommercialinvoice.countryoforigin
+	,hslcommercialinvoice.itemnumber
+	,hslcommercialinvoice.value
+	,hslcommercialinvoice.polinetotal
 	,whsloadtable.loadid 'Receipt Reference'
 	,whsloadtable.loadshipconfirmutcdatetime 'Receipt Date'
+	,hslcommercialinvoice.shippeddate
 	,'PEIM' 'Receipt Type'
 	,hslcommercialinvoice.portairportofarrival 'Port/Airport of Arrival'
 	,hslcommercialinvoice.airportofdeparture 'Airport of Departure'
@@ -11,15 +18,14 @@ SELECT
 	,'' 'Container ID'
 	,hslcommercialinvoice.modeoftransport 'Mode of Transport'
 	,'3' 'Inland Mode of Transport'
-	,SUM(hslcommercialinvoice.value) 'Total Value'
 	,hslcommercialinvoice.numberofpackages 'No. of Packages'
 	,'' 'Volume (cubic metres)'
-	,SUM(hslcommercialinvoice.grossweight) 'Gross Weight'
 	,'' 'Agent'
 	,'' 'Carrier'
 	,hslcommercialinvoice.freightcharges 'Freight'
 	,hslcommercialinvoice.freightchargescurrency 'Freight currency'
 	,hslcommercialinvoice.freightbasis 'Freqight basis'
+	,hslcommercialinvoice.locationname
 	,'' 'Air Freight'
 	,'' 'Air Freight Currency'
 	,'' 'Air Freight basis'
@@ -52,23 +58,8 @@ AND
 	whsloadtable.dataareaid IN ('end.','END.')
 AND
 	whsloadtable.loadstatus != '0'
---AND
---	loadid = 'LD-3825365'
-
-GROUP BY
-	 whsloadtable.loadid
-	,whsloadtable.loadshipconfirmutcdatetime
-	,hslcommercialinvoice.portairportofarrival
-	,hslcommercialinvoice.airportofdeparture
-	,hslcommercialinvoice.nationality
-	,hslcommercialinvoice.modeoftransport
-	,hslcommercialinvoice.numberofpackages
-	,hslcommercialinvoice.freightcharges
-	,hslcommercialinvoice.freightchargescurrency
-	,hslcommercialinvoice.freightbasis
-	,hslcommercialinvoice.arrivaltransportidtype
-	,hslcommercialinvoice.arrivaltransportid
-	,hslcommercialinvoice.mrn
-	,hslcommercialinvoice.bookingreference
-	,hslcommercialinvoice.bookingreference
-	,hslcommercialinvoice.shippeddate
+AND
+	loadid = 'LD-3811681'
+AND
+	ordernum = 'PO-016284'
+	
