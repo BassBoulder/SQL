@@ -36,7 +36,7 @@ SELECT
     ,hslcommercialinvoice.mrn AS MRN
     ,'' AS Previous_Document_Ref
     ,'' AS Previous_Document_Type
-    ,hslcommercialinvoice.bookingreference AS `Key`
+    ,hslcommercialinvoice.bookingreference AS 'Key'
     ,hslcommercialinvoice.bookingreference AS Level_Key
     ,'' AS Parent_Key
 

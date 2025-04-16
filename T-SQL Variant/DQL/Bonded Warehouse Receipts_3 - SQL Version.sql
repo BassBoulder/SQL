@@ -49,7 +49,7 @@ SELECT
     ,'' AS NOTC_b
     ,hslcommercialinvoice.preferencedocumentcode AS Preference_Document_Code
     ,hslcommercialinvoice.preferencedocumentstatuscode AS Preference_Document_Status_Code
-    ,concat_ws('||', hslcommercialinvoice.bookingreference, hslcommercialinvoice.commercialinvoiceid, hslcommercialinvoice.recid) AS `Key`
+    ,concat_ws('||', hslcommercialinvoice.bookingreference, hslcommercialinvoice.commercialinvoiceid, hslcommercialinvoice.recid) AS 'Key'
     ,hslcommercialinvoice.recid AS Level_Key
     ,hslcommercialinvoice.commercialinvoiceid AS Parent_Key
 

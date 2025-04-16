@@ -41,7 +41,7 @@ SELECT
 
     ,'1' AS NOTC_b
     ,'' AS Country_of_Consignment
-    ,concat_ws('||', hslcommercialinvoice.bookingreference, hslcommercialinvoice.commercialinvoiceid) AS Key
+    ,concat_ws('||', hslcommercialinvoice.bookingreference, hslcommercialinvoice.commercialinvoiceid) AS 'Key'
     ,hslcommercialinvoice.commercialinvoiceid AS Level_Key
     ,hslcommercialinvoice.bookingreference AS Parent_Key
 
